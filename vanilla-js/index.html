@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="assets/favicons/favicon-48.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16.png">
+  <link rel="manifest" href="assets/favicons/manifest.json">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script defer src="assets/js/index-rewrite.js"></script>
+  <title>Reto técnico</title>
+</head>
+<body>
+  <div class="container">
+    <div class="app">
+      <h1>This is a technical proof</h1>
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur impedit nostrum incidunt labore cumque. Possimus, ad placeat! Exercitationem dicta nemo unde perspiciatis, facilis cum, autem possimus a at, consectetur accusantium.</p>
+      <ul id="store" class="list-stored"></ul>
+      <div class="controls">
+        <button id="btnUndo" class="btn btn-undo"><span class="icon-undo"></span></button>
+        <button id="btnDeleteItems" class="btn">delete</button>
+        <button id="btnOpenModal" class="btn btn-color-inv">add</button>
+      </div>
+    </div>
+  </div>
+  <div id="overlay" class="overlay">
+    <div class="container">
+      <div class="input-modal">
+        <p>Add item to list</p>
+        <p id="warning" class="warning --is-hidden">Please, write some value before adding to the list</p>
+          <input type="text" 
+            id="add_text"
+            class="addition"
+            placeholder="Type the text here..."/>
+          <div class="controls">
+            <button id="btnAddItem" class="btn">add</button>
+            <button id="btnCloseModal" class="btn">cancel</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
