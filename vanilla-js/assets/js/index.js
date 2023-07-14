@@ -1,3 +1,60 @@
+class ItemManager {
+  constructor() {
+      this.values = [];
+      this.items = [];
+      this.selectedItems = [];
+      this.undoItems = [];
+  }
+
+  addItem(textValue) {
+    if(textValue.length < 1) {
+      warning.classList.remove('--is-hidden');
+      return;
+    }
+      const idx = this.values.push(textValue);
+      const listItem = document.createElement('li');
+      listItem.setAttribute('id', `item-${idx}`);
+      listItem.classList.add('stored-item');
+      listItem.textContent = textValue;
+      store.appendChild(listItem);
+      this.items.push(listItem);
+      inputText.value = "";
+
+      listItem.addEventListener('click', (evt) => {
+          this.selectItem(evt.target);
+      });
+  }
+
+  deleteItems() {
+      this.undoItems = [...this.items];
+      this.items = this.items.filter(item => !this.selectedItems.includes(item));
+      this.redrawItems();
+      this.selectedItems = [];
+  }
+  selectItem(_item) {
+      if(this.selectedItems.find(item => item == _item)) {
+          _item.classList.remove('is--selected');
+          this.selectedItems = this.selectedItems.filter(item => item != _item);
+      } else {
+          _item.classList.add('is--selected');
+          this.selectedItems.push(_item);
+      }
+  }
+
+  undoDelete() {
+      this.items = [...this.undoItems];
+      this.redrawItems();
+  }
+
+  redrawItems() {
+      store.innerHTML = '';
+      this.items.forEach(element => {
+          store.appendChild(element);
+          element.classList.add('stored-item');
+      });
+  }
+}
+
 const btnAddBtn = document.querySelector('button#btnAddItem.btn.add');
 const inputText = document.querySelector('#add_text');
 const store = document.querySelector('#store');
@@ -6,85 +63,29 @@ const btnOpenModal = document.querySelector('#btnOpenModal');
 const btnCloseModal = document.querySelector('#btnCloseModal');
 const btnDeleteItems = document.querySelector('#btnDeleteItems');
 const btnUndo = document.querySelector('#btnUndo');
-const values = [];
-let lastDeleted = '';
-let items = [];
-let selectedItems = [];
-let undoItems = [];
+const warning = document.querySelector('#warning');
+const itemManager = new ItemManager();
 
-btnAddItem.addEventListener('click', () => {
-  addItem();
-});
-
+// Event listeners
+btnAddItem.addEventListener('click', () => itemManager.addItem(inputText.value));
 inputText.addEventListener('keydown', (evt) => {
+  warning.classList.add('--is-hidden');
   if (evt.keyCode == 13) {
-    addItem();
+      itemManager.addItem(inputText.value);
   }
 });
-
 btnOpenModal.addEventListener('click', () => {
   overlay.classList.add('is--open');
   inputText.focus();
 });
+btnCloseModal.addEventListener('click', () => overlay.classList.remove('is--open') );
+btnDeleteItems.addEventListener('click', () => itemManager.deleteItems());
+btnUndo.addEventListener('click', () => itemManager.undoDelete());
 
-btnCloseModal.addEventListener('click', () => {
-  overlay.classList.remove('is--open')
-});
-
-btnDeleteItems.addEventListener('click', () => {
-  deleteItems();
-});
-
-btnUndo.addEventListener('click', () => {
-  store.innerHTML = '';
-  Array.from(undoItems).forEach(element => {
-    store.appendChild(element);
-    element.setAttribute('class', 'stored-item');
-  });
-}); 
-
-// Add new items to the list
-
-function addItem() {
-  const textValue = inputText.value;
-  let idx = values.push(textValue);
-  const listItem = document.createElement('li');
-  listItem.setAttribute('id', `item-${idx}`);
-  listItem.setAttribute('class', `stored-item`);
-  listItem.textContent = textValue;
-  store.appendChild(listItem);
-  inputText.value = '';
-  items = document.querySelectorAll('.stored-item');
-  listItem.addEventListener('click', (evt) => {
-    selectItem(evt.target);
-  });
-}
-
-// Delete selected items
-
-function deleteItems() {
-  undoItems = [...Array.from(store.children)];
-  let updatedItems = Array.from(store.children).filter(
-    item => !selectedItems.includes(item)
-  );
-    
-  store.innerHTML = '';
-  updatedItems.forEach(element => {
-    store.appendChild(element);
-  });
-  selectedItems = [];
-}
-
-function selectItem(_item) {
-  // Checks if the item was already on the selection list
-  if(selectedItems.find(item => item == _item)) {
-    _item.classList.remove('is--selected');
-    // Removes item from the selection list
-    selectedItems.forEach((item, idx, arr) => {
-      arr.splice(idx, 1);
-    });
-  } else {
-    _item.setAttribute('class', 'is--selected');
-    selectedItems.push(_item);
-  }
-}
+// Here, I have encapsulated the methods inside
+// a class to make them more organized. I have also extracted a
+// `redrawItems` method to eliminate repetition. This code now
+// follows the SOLID principles better. It adheres more to the
+// Single Responsibility Principle by having each method do one thing.
+// It is also more open to extension in the future. For example, we could
+// easily add a new method on this class to support new features.
