@@ -1,0 +1,157 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.btn {
+  appearance: none;
+  background-color: transparent;
+  border: 1px solid #324bff;
+  border-radius: 30px;
+  text-transform: uppercase;
+  font-size: 17px;
+  color: #324bff;
+  padding: 11px 28px;
+  user-select: none;
+}
+.btn:hover {
+  background-color: #f7f7f7;
+}
+.btn-add {
+  margin-left: auto;
+}
+.btn-color-inv {
+  background-color: #324bff;
+  color: white;
+}
+.btn-color-inv:hover {
+  background-color: #324bff;
+  filter: brightness(120%);
+}
+
+.icon-undo {
+  display: inline-block;
+  position: relative;
+  top: 2px;
+  width: 20px;
+  height: 20px;
+  background-size: 100%;
+  background-image: url("../icons/icon-undo.svg");
+}
+
+input[type='text'] {
+  border: 1px solid;
+  border-color: #e1e1e1;
+  background-color: #f7f7f7;
+}
+
+p {
+  margin-bottom: 20px;
+  font-size: 1.25rem;
+}
+
+input[type="text"] {
+  margin-bottom: 20px;
+  padding: 1rem;
+  font-size: 1.5rem;
+}
+
+html {
+  font-size: 14px;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat";
+  background: #a1c4fe;
+  background: linear-gradient(120deg, #a1c4fe 0%, #c2e9fb 100%);
+  color: #868686;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container .app {
+  text-align: center;
+  border-radius: 10px;
+  background-color: white;
+  padding: 50px;
+  max-width: 800px;
+  box-shadow: 1px 4px 3px 2px rgba(0, 0, 0, 0.15);
+}
+.container .app h1 {
+  font-size: 2.9rem;
+  margin-bottom: 40px;
+  color: #333333;
+}
+.container .app p {
+  font-size: 18px;
+  margin-bottom: 40px;
+}
+.container .app .list-stored {
+  text-align: left;
+  list-style: none;
+  margin-bottom: 40px;
+  border: 1px solid #e1e1e1;
+  background-color: #f7f7f7;
+  min-height: 40px;
+  padding: 10px;
+}
+.container .app .list-stored li {
+  user-select: none;
+  font-size: 1.25rem;
+  padding: 5px 8px;
+}
+.container .app .list-stored li.is--selected {
+  background-color: #324bff;
+  color: white;
+}
+.container .app .controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.overlay {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.overlay.is--open {
+  display: block;
+}
+
+.input-modal {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 30px;
+  border-radius: 15px;
+  min-width: 530px;
+}
+.input-modal .add-item-form {
+  display: flex;
+  flex-direction: column;
+}
+.input-modal .add-item-form .controls {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.--is-hidden {
+  opacity: 0;
+}
+
+.warning {
+  color: red;
+}
+
+/*# sourceMappingURL=styles.css.map */
