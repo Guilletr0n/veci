@@ -81,11 +81,3 @@ btnOpenModal.addEventListener('click', () => {
 btnCloseModal.addEventListener('click', () => overlay.classList.remove('is--open') );
 btnDeleteItems.addEventListener('click', () => itemManager.deleteItems());
 btnUndo.addEventListener('click', () => itemManager.undoDelete());
-
-// Here, I have encapsulated the methods inside
-// a class to make them more organized. I have also extracted a
-// `redrawItems` method to eliminate repetition. This code now
-// follows the SOLID principles better. It adheres more to the
-// Single Responsibility Principle by having each method do one thing.
-// It is also more open to extension in the future. For example, we could
-// easily add a new method on this class to support new features.
